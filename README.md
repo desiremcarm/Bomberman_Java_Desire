@@ -1,12 +1,12 @@
-# DAM - Exercise 1 
+# ⭐ DAM - Exercise 1 
 
-### Objective
+### Objective 🎯
 ---
 Creating a Bomberman-like game just using the console and
 - Not using modular style
 - Not using advanced programming techniques or approaches
 
-### How does the app work
+### How does the app work ⚙️
 ---
 1. Ask for a number of Rows to the user
 2. Ask for a number of Columns to the user
@@ -22,7 +22,7 @@ Creating a Bomberman-like game just using the console and
 | 2   | **Plant bomb** | User must provide with X and Y coordinates to plant a bomb and earn a score. This choice checks if the game is over or not. If its over, closes the program. If not, shows the menu again.        |
 | 3   | **Ranking** | Shows the global total ranking for the current match. Scores are not saved in between matches.        |
 
-### Demo GIF
+### Demo GIF 📹
 ---
 ![Gif showing how the app works on the console](img/bomberman_demo.gif)
 
