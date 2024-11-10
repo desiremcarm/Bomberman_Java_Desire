@@ -9,7 +9,12 @@ public class MarronDesireEjercicio1 {
         int cols;
         int rows;
         int[][] board;
+        int[] bombSpot = new int[2];
         String menuOptions = "[2] Poner bomba \n[1] Mostrar matriz \n[0] Salir";
+        int menuOption = -1;
+        boolean showMenu = true;
+        boolean bombX = false;
+        boolean bombY = false;
 
         Scanner scan = new Scanner(System.in); // Creación scanner
 
@@ -32,17 +37,78 @@ public class MarronDesireEjercicio1 {
             }
         }
 
-        // Mostrar menú
-        System.out.println(menuOptions);
+        // Mostrar menu
+        while(showMenu){
+            System.out.println(menuOptions);
 
-        // Mostrar matriz
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                // Mostrar spot en columna
-                System.out.print(board[i][j] + " ");
+            if(bombX && bombY){
+                bombX = false;
+                bombY = false;
             }
-            // Mostrar spot en fila
-            System.out.println();
+
+            if(!scan.hasNextInt()){
+                scan.next();
+            } else {
+                menuOption = scan.nextInt();
+                showMenu = false;
+            }
+
+            switch (menuOption){
+                case 1:
+                    System.out.println("It was 1");
+
+                    // Mostrar matriz
+                    for (int i = 0; i < rows; i++) {
+                        for (int j = 0; j < cols; j++) {
+                            // Mostrar spot en columna
+                            System.out.print(board[i][j] + " ");
+                        }
+                        // Mostrar spot en fila
+                        System.out.println();
+                    }
+
+                    showMenu = true;
+
+                    break;
+
+                case 2:
+                    System.out.println("It was 2");
+                    int coord;
+
+                    while(!bombX){
+                        System.out.println("Row");
+                        if(!scan.hasNextInt()){
+                            scan.next();
+                        } else {
+                            coord = scan.nextInt();
+                            bombSpot[0] = coord;
+                            bombX = true;
+                        }
+                    }
+
+                    while(!bombY){
+                        System.out.println("Col");
+                        if(!scan.hasNextInt()){
+                            scan.next();
+                        } else {
+                            coord = scan.nextInt();
+                            bombSpot[1] = coord;
+                            bombY = true;
+                        }
+                    }
+
+                    System.out.println("Coord de bombas: " + bombSpot[0] + " " + bombSpot[1]);
+
+                    showMenu = true;
+
+                    break;
+                case 0:
+                    System.out.println("Bye");
+                    break;
+                default:
+                    System.out.println("Mal");
+                    break;
+            }
         }
     }
 }
