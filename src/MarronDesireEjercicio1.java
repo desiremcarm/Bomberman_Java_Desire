@@ -41,6 +41,7 @@ public class MarronDesireEjercicio1 {
         while(showMenu){
             System.out.println(menuOptions);
 
+            // Reset coordenadas de las bombas
             if(bombX && bombY){
                 bombX = false;
                 bombY = false;
