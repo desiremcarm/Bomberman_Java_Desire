@@ -10,11 +10,12 @@ public class MarronDesireEjercicio1 {
         int rows;
         int[][] board;
         int[] bombSpot = new int[2];
-        String menuOptions = "[2] Poner bomba \n[1] Mostrar matriz \n[0] Salir";
+        String menuOptions = "[2] Poner bomba \n[1] Mostrar matriz \n[3] Ver ranking \n[0] Salir";
         int menuOption = -1;
         boolean showMenu = true;
         boolean bombX = false;
         boolean bombY = false;
+        int score = 0;
 
         Scanner scan = new Scanner(System.in); // Creación scanner
 
@@ -75,6 +76,7 @@ public class MarronDesireEjercicio1 {
                 case 2:
                     System.out.println("It was 2");
                     int coord;
+                    int bombScore = 0;
 
                     while(!bombX){
                         System.out.println("Row");
@@ -99,6 +101,29 @@ public class MarronDesireEjercicio1 {
                     }
 
                     System.out.println("Coord de bombas: " + bombSpot[0] + " " + bombSpot[1]);
+
+                    for (int i = 0; i < rows; i++) {
+                        for (int j = 0; j < cols; j++) {
+                            if(j == bombSpot[1] - 1){
+                                bombScore += board[i][j];
+                                board[i][j] = 0;
+                            }
+                            if(i == bombSpot[0] - 1){
+                                bombScore += board[i][j];
+                                board[i][j] = 0;
+                            }
+                        }
+                    }
+
+                    score += bombScore;
+
+                    System.out.println(bombScore);
+                    
+                    showMenu = true;
+
+                    break;
+                case 3:
+                    System.out.println("Ranking actual: " + score);
 
                     showMenu = true;
 
