@@ -16,16 +16,20 @@ public class MarronDesireEjercicio1 {
         boolean bombX = false;
         boolean bombY = false;
         int score = 0;
+        int boardTotalValue = 0;
 
         Scanner scan = new Scanner(System.in); // Creación scanner
 
         // Pedir num columnas
-        System.out.println("Say something");
+        System.out.println("How many rows does your board have?");
         cols = scan.nextInt();
 
         // Pedir num filas
-        System.out.println("Say something");
+        System.out.println("How many columns does your board have?");
         rows = scan.nextInt();
+
+        // Enseñar al user sus elecciones
+        System.out.println("Your board has " + rows + " rows and " + cols + " columns.");
 
         // Crear matriz 2D con los valores introducidos por el usuario
         board = new int[rows][cols];
@@ -35,14 +39,16 @@ public class MarronDesireEjercicio1 {
             for (int j = 0; j < cols; j++) {
                 // Asignar valor random entre 1 y 9 a cada spot del board
                 board[i][j] = (int) (Math.random() * (MAX_RANDOM - MIN_RANDOM)) + MIN_RANDOM;
+                boardTotalValue += board[i][j];
             }
         }
+
+        System.out.println("Your board total value is: " + boardTotalValue);
 
         // Mostrar menu
         while(showMenu){
             System.out.println(menuOptions);
 
-            // Reset coordenadas de las bombas
             if(bombX && bombY){
                 bombX = false;
                 bombY = false;
@@ -57,7 +63,7 @@ public class MarronDesireEjercicio1 {
 
             switch (menuOption){
                 case 1:
-                    System.out.println("It was 1");
+                    System.out.println("You've chosen: 'Show board'");
 
                     // Mostrar matriz
                     for (int i = 0; i < rows; i++) {
@@ -74,33 +80,57 @@ public class MarronDesireEjercicio1 {
                     break;
 
                 case 2:
-                    System.out.println("It was 2");
-                    int coord;
+                    System.out.println("You've chosen: 'Plant bomb'");
+                    int coord = 0;
                     int bombScore = 0;
 
+                    System.out.println("Select a row to plant the bomb. Use a number below or equal to " + rows);
+
                     while(!bombX){
-                        System.out.println("Row");
+
                         if(!scan.hasNextInt()){
                             scan.next();
                         } else {
                             coord = scan.nextInt();
+                            while(coord > rows || coord <= 0){
+                                System.out.println("That row doesn't exist, try again");
+                                if(!scan.hasNextInt()){
+                                    scan.next();
+                                } else {
+                                    coord = scan.nextInt();
+                                }
+                            }
+                            System.out.println("The row is: " + coord);
                             bombSpot[0] = coord;
                             bombX = true;
                         }
+
                     }
 
+                    System.out.println("Select a column to plant the bomb. Use a number below or equal to " + cols);
+
                     while(!bombY){
-                        System.out.println("Col");
+
                         if(!scan.hasNextInt()){
                             scan.next();
                         } else {
                             coord = scan.nextInt();
+                            while(coord > cols || coord <= 0){
+                                System.out.println("That column doesn't exist, try again");
+                                if(!scan.hasNextInt()){
+                                    scan.next();
+                                } else {
+                                    coord = scan.nextInt();
+                                }
+                            }
+                            System.out.println("The column is: " + coord);
                             bombSpot[1] = coord;
                             bombY = true;
                         }
+
                     }
 
-                    System.out.println("Coord de bombas: " + bombSpot[0] + " " + bombSpot[1]);
+                    System.out.println("Your chosen coordinates: Row " + bombSpot[0] + ", Column " + bombSpot[1]);
 
                     for (int i = 0; i < rows; i++) {
                         for (int j = 0; j < cols; j++) {
@@ -117,22 +147,27 @@ public class MarronDesireEjercicio1 {
 
                     score += bombScore;
 
-                    System.out.println(bombScore);
-                    
-                    showMenu = true;
+                    System.out.println("Your score for this move: " + bombScore);
+
+                    if(bombScore >= boardTotalValue){
+                        System.out.println("You finished the game! Your total score: " + score);
+                    } else {
+                        showMenu = true;
+                    }
 
                     break;
                 case 3:
-                    System.out.println("Ranking actual: " + score);
+                    System.out.println("Current ranking: " + score);
 
                     showMenu = true;
 
                     break;
                 case 0:
-                    System.out.println("Bye");
+                    System.out.println("You've chosen to close the game. Bye!");
                     break;
                 default:
-                    System.out.println("Mal");
+                    System.out.println("That option is not valid. Try again.");
+                    showMenu = true;
                     break;
             }
         }
