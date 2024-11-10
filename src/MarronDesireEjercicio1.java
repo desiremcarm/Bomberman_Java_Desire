@@ -17,11 +17,11 @@ public class MarronDesireEjercicio1 {
 
         // MENU RELATED
         String menuOptions = "[2] 💣 Poner bomba \n[1] ♟️ Mostrar matriz \n[3] 📊 Ver ranking \n[0] 👋 Salir";
-        int menuOption = -1;
+        int menuOption;
 
         // BOARD RELATED
-        int cols = 0;
-        int rows = 0;
+        int cols;
+        int rows;
         int[][] board;
         int boardTotalValue = 0;
 
